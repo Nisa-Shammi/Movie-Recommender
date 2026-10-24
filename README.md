@@ -47,7 +47,7 @@ A **content-based movie recommender** built with Python, scikit-learn and Stream
 ## 📥 How to Download and Run (Step by Step)
 
 ### Step 1: Install Python
-Download Python 3.10 or newer from [python.org](https://www.python.org/downloads/). During installation, **tick the "Add Python to PATH" checkbox**.
+Download Python 3.11 or newer (3.12 recommended) from [python.org](https://www.python.org/downloads/). During installation, **tick the "Add Python to PATH" checkbox**.
 
 ### Step 2: Download the project
 Choose one option:
@@ -55,7 +55,7 @@ Choose one option:
 - **Option A (no Git needed):** click the green **Code** button at the top of this repo, then **Download ZIP**, and extract it
 - **Option B (with Git):**
   ```bash
-  git clone https://github.com/nisashammi33-collab/Movie-Recommender.git
+  git clone https://github.com/Nisa-Shammi/Movie-Recommender.git
   ```
 
 ### Step 3: Open the project folder
@@ -66,7 +66,7 @@ cd Movie-Recommender
 
 ### Step 4: Install the required libraries
 ```bash
-python -m pip install pandas numpy scikit-learn streamlit
+python -m pip install -r requirements.txt
 ```
 
 ### Step 5: Run the app
@@ -76,7 +76,7 @@ python -m streamlit run app.py
 Your browser will open automatically. If not, go to **http://localhost:8501**.
 
 ### Step 6: Get recommendations 🎉
-Choose a movie from the list and click the recommend button to see similar movies.
+Choose a movie from the list and click **Find Similar** to see 5 similar movies.
 
 ---
 
@@ -113,6 +113,6 @@ The trained files are already in the repo, so you can skip this. If you want to 
 
 **Nisa Shammi** – BCA student, Don Bosco College, Kottiyam
 
-🔗 [LinkedIn](https://www.linkedin.com/in/nisa-shammi-381086394/) · 💻 [GitHub](https://github.com/nisashammi33-collab)
+🔗 [LinkedIn](https://www.linkedin.com/in/nisa-shammi-381086394/) · 💻 [GitHub](https://github.com/Nisa-Shammi)
 
 ⭐ If you like this project, consider giving it a star!
