@@ -291,39 +291,38 @@ def load_models():
     try:
         base_dir = os.path.dirname(__file__)
         movies_path = os.path.join(base_dir, 'movie_list.pkl')
-        similarity_path = os.path.join(base_dir, 'similarity.pkl')
+        vectors_path = os.path.join(base_dir, 'vectors.pkl')
+        knn_path = os.path.join(base_dir, 'knn_model.pkl')
 
         with open(movies_path, 'rb') as f:
             movies = pickle.load(f)
-        with open(similarity_path, 'rb') as f:
-            similarity = pickle.load(f)
+        with open(vectors_path, 'rb') as f:
+            vectors = pickle.load(f)
+        with open(knn_path, 'rb') as f:
+            knn = pickle.load(f)
 
-        return movies, similarity
+        return movies, vectors, knn
 
     except Exception as e:
         st.error(f"❌ Error loading model files: {e}")
-        return None, None
+        return None, None, None
 
 
-movies, similarity = load_models()
+movies, vectors, knn = load_models()
 
 
 # -------------------- RECOMMEND FUNCTION --------------------
 def recommend(movie):
     try:
         movie_index = movies[movies['title'] == movie].index[0]
-        distances = similarity[movie_index]
-        movies_list = sorted(
-            list(enumerate(distances)),
-            reverse=True,
-            key=lambda x: x[1]
-        )
+
+        # K-Nearest Neighbors: the closest neighbor is the movie itself,
+        # so we skip it and return the next 5.
+        distances, indices = knn.kneighbors(vectors[movie_index])
 
         recommended_movies = []
-
-        for i in movies_list[1:6]:
-            movie_id = movies.iloc[i[0]].movie_id
-            recommended_movies.append(movies.iloc[i[0]].title)
+        for i in indices[0][1:6]:
+            recommended_movies.append(movies.iloc[i].title)
 
         return recommended_movies
 
@@ -362,7 +361,7 @@ with st.sidebar:
 
 
 # -------------------- MAIN CONTENT --------------------
-if movies is None:
+if movies is None or vectors is None or knn is None:
     st.stop()
 
 # ── Hero ──────────────────────────────────────────────
